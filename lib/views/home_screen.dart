@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(height: 16),
 
               // All movies
-              InkWell(child: const GridMovie()),
+              const GridMovie(),
             ],
           ),
         ),

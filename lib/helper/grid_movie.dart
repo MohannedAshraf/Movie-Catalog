@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_catalog_app/controller/watch_list_controller.dart';
 import 'package:movie_catalog_app/helper/app_colors.dart';
 import 'package:movie_catalog_app/models/movie_model.dart';
+import 'package:movie_catalog_app/views/movie_details_screen.dart';
 import 'package:provider/provider.dart';
 
 class GridMovie extends StatelessWidget {
@@ -39,8 +40,16 @@ class GridMovie extends StatelessWidget {
           children: [
             Stack(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) => MovieDetailsScreen(title: movie.title),
+                      ),
+                    );
+                  },
                   child: Image.asset(
                     movie.image,
                     width: itemWidth,

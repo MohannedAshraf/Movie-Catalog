@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_catalog_app/helper/app_colors.dart';
 import 'package:movie_catalog_app/models/movie_model.dart';
+import 'package:movie_catalog_app/views/movie_details_screen.dart';
 
 class ListMovie extends StatelessWidget {
   const ListMovie({super.key});
@@ -25,15 +26,26 @@ class ListMovie extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Image.asset(
-                  movie.image,
-                  width: itemWidth,
-                  height: itemHeight,
-                  fit: BoxFit.cover,
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => MovieDetailsScreen(title: movie.title),
+                    ),
+                  );
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Image.asset(
+                    movie.image,
+                    width: itemWidth,
+                    height: itemHeight,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               const SizedBox(height: 16),

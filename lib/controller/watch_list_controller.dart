@@ -13,4 +13,12 @@ class WatchListController extends ChangeNotifier {
     movieItems.removeWhere((element) => element.title == item.title);
     notifyListeners();
   }
+
+  MovieModel? getMovieByTitle(String title) {
+    try {
+      return movieItems.firstWhere((element) => element.title == title);
+    } catch (e) {
+      return null;
+    }
+  }
 }

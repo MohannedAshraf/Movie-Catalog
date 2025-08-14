@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_catalog_app/controller/watch_list_controller.dart';
 import 'package:movie_catalog_app/helper/app_colors.dart';
 import 'package:movie_catalog_app/models/movie_model.dart';
+import 'package:movie_catalog_app/views/movie_details_screen.dart';
 import 'package:provider/provider.dart';
 
 class WatchListItem extends StatelessWidget {
@@ -21,6 +22,24 @@ class WatchListItem extends StatelessWidget {
             horizontal: 10,
             vertical: 5,
           ),
+          // التنقل من الصورة فقط
+          leading: InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => MovieDetailsScreen(title: movieItem.title),
+                ),
+              );
+            },
+            child: Image.asset(
+              movieItem.image,
+              height: 150,
+              width: 100,
+              fit: BoxFit.cover,
+            ),
+          ),
           title: Text(
             movieItem.title,
             style: TextStyle(
@@ -31,12 +50,6 @@ class WatchListItem extends StatelessWidget {
           subtitle: Text(
             movieItem.rating.toString(),
             style: TextStyle(color: AppColors.secondry),
-          ),
-          leading: Image.asset(
-            movieItem.image,
-            height: 150,
-            width: 100,
-            fit: BoxFit.cover,
           ),
           trailing: IconButton(
             icon: Icon(
