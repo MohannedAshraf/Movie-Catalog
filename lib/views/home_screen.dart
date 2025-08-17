@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:movie_catalog_app/controller/watch_list_controller.dart';
 import 'package:movie_catalog_app/helper/app_colors.dart';
 import 'package:movie_catalog_app/helper/grid_movie.dart';
 import 'package:movie_catalog_app/helper/list_movie.dart';
+import 'package:movie_catalog_app/views/movie_details_screen.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String query = "";
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +42,17 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Search bar
+              //  Search bar
               TextFormField(
+                onChanged: (value) {
+                  setState(() {
+                    query = value;
+                  });
+                },
+                style: TextStyle(
+                  color: AppColors.primary,
+                  fontSize: screenWidth * 0.042,
+                ),
                 decoration: InputDecoration(
                   fillColor: AppColors.search,
                   filled: true,
@@ -53,17 +72,58 @@ class HomeScreen extends StatelessWidget {
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.black, width: 1),
+                    borderSide: const BorderSide(color: Colors.black, width: 1),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(color: Colors.black, width: 1.5),
+                    borderSide: const BorderSide(
+                      color: Colors.black,
+                      width: 1.5,
+                    ),
                   ),
                 ),
               ),
-              // Special movies
-              SizedBox(height: 16),
+
+              const SizedBox(height: 16),
+
+              //  Search Results
+              if (query.isNotEmpty)
+                Consumer<WatchListController>(
+                  builder: (context, controller, child) {
+                    final results = controller.search(query);
+                    return Column(
+                      children:
+                          results.map((movie) {
+                            return ListTile(
+                              title: Text(
+                                movie.title,
+                                style: TextStyle(
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (_) => MovieDetailsScreen(
+                                          title: movie.title,
+                                        ),
+                                  ),
+                                );
+                              },
+                            );
+                          }).toList(),
+                    );
+                  },
+                ),
+
+              const SizedBox(height: 16),
+
+              //  Special movies
               InkWell(child: const ListMovie()),
+
               Text(
                 "All Movies",
                 style: TextStyle(
@@ -73,9 +133,9 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
-              // All movies
+              //  All movies
               const GridMovie(),
             ],
           ),

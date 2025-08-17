@@ -38,15 +38,16 @@ class MovieModel {
       "The Final Hour",
       "Whispers in the Dark",
       "Rising Storm",
-      "The Secret Code",
-      "Forgotten Dreams",
-      "The Perfect Alibi",
-      "Shattered Reality",
-      "Dark Waters",
-      "The Invisible Enemy",
-      "Deadly Silence",
-      "Parallel Lives",
-      "The Last Stand",
+
+      "Spider Man 1",
+      "Spider Man 2",
+      "Spider Man 3",
+      "Spider Man 4",
+      "Spider Man 5",
+      "Fast 1",
+      "Fast 2",
+      "Fast 3",
+      "Fast 4",
     ];
 
     final List<String> descriptions = [

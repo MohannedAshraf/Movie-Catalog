@@ -22,7 +22,7 @@ class WatchListItem extends StatelessWidget {
             horizontal: 10,
             vertical: 5,
           ),
-          // التنقل من الصورة فقط
+
           leading: InkWell(
             onTap: () {
               Navigator.push(

@@ -60,7 +60,7 @@ class MovieDetailsScreen extends StatelessWidget {
                       const SizedBox(height: 10),
 
                       Text(
-                        "تاريخ الإصدار: ${movie.releaseDate.toLocal().toString().split(' ')[0]}",
+                        " Release Date: ${movie.releaseDate.toLocal().toString().split(' ')[0]}",
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
